@@ -14,3 +14,6 @@ local.properties
 *.jks
 *.keystore
 keystore.properties
+
+# 빌드된 APK는 저장소 대신 GitHub Releases에 올린다(§9-3) — install-qr.png만 커밋 대상
+dist/*.apk
