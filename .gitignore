@@ -1,0 +1,16 @@
+*.iml
+.gradle/
+.kotlin/
+/local.properties
+/.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# 서명 keystore (계획서 §9-1 — 절대 커밋하지 않음)
+*.jks
+*.keystore
+keystore.properties

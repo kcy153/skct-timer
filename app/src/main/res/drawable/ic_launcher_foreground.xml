@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 진행 표시(§5 시험 화면의 "진행 표시" 도트와 같은 모티프)를 270도 링으로 단순화 —
+         12시 방향에서 시작해 시계방향으로 270도, 남은 90도는 비워둬 "진행 중"을 암시한다. -->
+    <path
+        android:pathData="M54,22 A32,32 0 1 1 22,54"
+        android:strokeColor="#2BB6A3"
+        android:strokeWidth="10"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+</vector>

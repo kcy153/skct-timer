@@ -1,0 +1,5 @@
+<resources>
+    <!-- 화면은 전부 Compose로 그리므로 시스템 기본 테마를 상속만 함. 실제 색/타이포는
+         ui/theme (Compose)에서 정의 — 5단계(마감)에서 아이콘과 함께 다시 다듬을 예정. -->
+    <style name="Theme.SkctTimer" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

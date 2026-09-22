@@ -1,0 +1,13 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- 상태표시줄 알림 아이콘은 단색 실루엣이어야 한다 — 런처 아이콘과 같은 링 모티프를 축소. -->
+    <path
+        android:pathData="M12,4 A7,7 0 1 1 5,11"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+</vector>
