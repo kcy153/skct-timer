@@ -203,7 +203,10 @@ el.startBtn.addEventListener("click", startExam);
 el.miniBtn.addEventListener("click", () => {
   const url = new URL(location.href);
   url.searchParams.set("mini", "1");
-  window.open(url.toString(), "_blank", "popup,width=460,height=130");
+  const popup = window.open(url.toString(), "_blank", "popup,width=460,height=130");
+  if (!popup) {
+    alert("팝업이 차단됐어요. 주소창 오른쪽의 팝업 차단 아이콘에서 이 사이트를 허용해 주세요.");
+  }
 });
 
 miniQuery.addEventListener("change", applyMini);
