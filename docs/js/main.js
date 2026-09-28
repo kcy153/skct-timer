@@ -19,7 +19,15 @@ const STORAGE_KEY_SOUND = "skct-sound-enabled";
 // 소리는 건너뛰고 조용히 따라잡기만 한다 — 한꺼번에 여러 알림음이 몰려 울리는 것을 막음.
 const STALE_ALERT_MS = 5000;
 
-const isFastMode = new URLSearchParams(location.search).get("fast") === "1";
+const params = new URLSearchParams(location.search);
+const isFastMode = params.get("fast") === "1";
+const forceMini = params.get("mini") === "1";
+const APP_TITLE = "쓱시티 타이머";
+const miniQuery = window.matchMedia("(max-height: 200px)");
+
+function applyMini() {
+  document.body.classList.toggle("mini", forceMini || miniQuery.matches);
+}
 
 const el = {
   screens: {
@@ -31,6 +39,7 @@ const el = {
   breakSecLabel: document.getElementById("breakSecLabel"),
   soundToggle: document.getElementById("soundToggle"),
   startBtn: document.getElementById("startBtn"),
+  miniBtn: document.getElementById("miniBtn"),
   segmentLabel: document.getElementById("examSegmentLabel"),
   time: document.getElementById("examTime"),
   nextLabel: document.getElementById("examNextLabel"),
@@ -100,6 +109,7 @@ function showScreen(name) {
   for (const [key, node] of Object.entries(el.screens)) {
     node.classList.toggle("hidden", key !== name);
   }
+  if (name !== "exam") document.title = APP_TITLE;
 }
 
 function startExam() {
@@ -174,6 +184,8 @@ function render(liveScreen) {
   const { segment, remainingSec, paused } = liveScreen;
   el.segmentLabel.textContent = segmentLabel(config, segment);
   el.time.textContent = formatMmSs(remainingSec);
+  // 여러 창을 띄워 쓸 때 작업표시줄/창 제목에서도 구분되도록 제목에 과목명+남은 시간을 넣는다.
+  document.title = `${formatMmSs(remainingSec)} ${el.segmentLabel.textContent}`;
   el.time.classList.toggle("warning", liveScreen.screen === "Exam" && liveScreen.isWarning);
 
   if (liveScreen.screen === "BreakTime") {
@@ -187,6 +199,15 @@ function render(liveScreen) {
 }
 
 el.startBtn.addEventListener("click", startExam);
+
+el.miniBtn.addEventListener("click", () => {
+  const url = new URL(location.href);
+  url.searchParams.set("mini", "1");
+  window.open(url.toString(), "_blank", "popup,width=460,height=130");
+});
+
+miniQuery.addEventListener("change", applyMini);
+applyMini();
 
 el.pauseBtn.addEventListener("click", () => {
   if (!clock) return;

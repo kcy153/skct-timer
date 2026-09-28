@@ -206,3 +206,113 @@ input[type="checkbox"] {
     font-size: 3.6rem;
   }
 }
+
+/* 작은창 모드: 창 높이가 작거나(?mini=1 / 작은 창으로 열기) 강제로 켜졌을 때 body.mini가 붙는다.
+   여러 창을 띄워 쓰는 용도라 한 줄(과목명 · 시간 · 버튼)로 압축하고 폰트를 줄인다. */
+body.mini #app {
+  padding: 6px 12px;
+}
+
+body.mini .screen {
+  max-width: none;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+}
+
+body.mini h1,
+body.mini .subtitle,
+body.mini #miniBtn {
+  display: none;
+}
+
+body.mini h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+body.mini .screen p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+body.mini #screen-exam:not(.hidden) {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas:
+    "label time ctrl"
+    "next  time ctrl";
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 0;
+}
+
+body.mini #examSegmentLabel {
+  grid-area: label;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.mini #examNextLabel {
+  grid-area: next;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.mini #examTime {
+  grid-area: time;
+  font-size: 1.9rem;
+  letter-spacing: 0;
+}
+
+body.mini .control-row {
+  grid-area: ctrl;
+  gap: 6px;
+}
+
+body.mini .primary-btn,
+body.mini .secondary-btn {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  min-width: 0;
+}
+
+body.mini .settings-block {
+  width: auto;
+  background: none;
+  padding: 0;
+  gap: 2px;
+  font-size: 0.75rem;
+}
+
+body.mini .settings-block label {
+  font-size: 0.75rem;
+  gap: 8px;
+}
+
+body.mini input[type="range"] {
+  width: 110px;
+}
+
+body.mini .fast-badge {
+  font-size: 0.7rem;
+}
+
+body.mini .dialog {
+  padding: 8px;
+}
+
+body.mini .dialog-box {
+  padding: 12px;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+body.mini .dialog-box p {
+  margin: 0;
+}
