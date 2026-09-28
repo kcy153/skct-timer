@@ -25,8 +25,27 @@ const forceMini = params.get("mini") === "1";
 const APP_TITLE = "쓱시티 타이머";
 const miniQuery = window.matchMedia("(max-height: 200px)");
 
+const STORAGE_KEY_MINI = "skct-mini";
+// 사용자가 버튼으로 고른 값이 있으면 그것을 우선하고, 없으면 ?mini=1 또는 창 높이로 자동 판단한다.
+let userMini = (() => {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY_MINI);
+    return saved === null ? null : saved === "1";
+  } catch {
+    return null;
+  }
+})();
+
+function isMini() {
+  return userMini !== null ? userMini : forceMini || miniQuery.matches;
+}
+
 function applyMini() {
-  document.body.classList.toggle("mini", forceMini || miniQuery.matches);
+  const mini = isMini();
+  document.body.classList.toggle("mini", mini);
+  for (const btn of document.querySelectorAll(".size-toggle")) {
+    btn.textContent = mini ? "큰 화면" : "작은 화면";
+  }
 }
 
 const el = {
@@ -39,7 +58,7 @@ const el = {
   breakSecLabel: document.getElementById("breakSecLabel"),
   soundToggle: document.getElementById("soundToggle"),
   startBtn: document.getElementById("startBtn"),
-  miniBtn: document.getElementById("miniBtn"),
+  sizeToggles: document.querySelectorAll(".size-toggle"),
   segmentLabel: document.getElementById("examSegmentLabel"),
   time: document.getElementById("examTime"),
   nextLabel: document.getElementById("examNextLabel"),
@@ -200,14 +219,15 @@ function render(liveScreen) {
 
 el.startBtn.addEventListener("click", startExam);
 
-el.miniBtn.addEventListener("click", () => {
-  const url = new URL(location.href);
-  url.searchParams.set("mini", "1");
-  const popup = window.open(url.toString(), "_blank", "popup,width=460,height=130");
-  if (!popup) {
-    alert("팝업이 차단됐어요. 주소창 오른쪽의 팝업 차단 아이콘에서 이 사이트를 허용해 주세요.");
-  }
-});
+for (const btn of el.sizeToggles) {
+  btn.addEventListener("click", () => {
+    userMini = !isMini();
+    try {
+      localStorage.setItem(STORAGE_KEY_MINI, userMini ? "1" : "0");
+    } catch {}
+    applyMini();
+  });
+}
 
 miniQuery.addEventListener("change", applyMini);
 applyMini();

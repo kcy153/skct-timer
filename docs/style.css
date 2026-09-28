@@ -222,8 +222,7 @@ body.mini .screen {
 }
 
 body.mini h1,
-body.mini .subtitle,
-body.mini #miniBtn {
+body.mini .subtitle {
   display: none;
 }
 
