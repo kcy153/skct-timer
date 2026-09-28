@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="description" content="SKCT 인지역량 시험(5영역 × 15분) 연습용 웹 타이머" />
+<title>쓱시티 타이머</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main id="app">
+
+  <section id="screen-start" class="screen">
+    <h1>쓱시티 타이머</h1>
+    <p class="subtitle">SKCT 인지역량 시험 연습용 (5영역 × 15분, 영역 사이 휴식)</p>
+
+    <div class="settings-block">
+      <label for="breakSec">영역 사이 휴식 시간 <span id="breakSecLabel">1:00</span></label>
+      <input type="range" id="breakSec" />
+    </div>
+
+    <div class="settings-block checkbox-row">
+      <label><input type="checkbox" id="soundToggle" /> 소리 알림</label>
+    </div>
+
+    <button id="startBtn" class="primary-btn">시작</button>
+
+    <p id="fastBadge" class="fast-badge hidden">빠른 테스트 모드 (1/60 축소)</p>
+  </section>
+
+  <section id="screen-exam" class="screen hidden">
+    <div class="segment-label" id="examSegmentLabel">언어이해</div>
+    <div class="time-display" id="examTime">15:00</div>
+    <div class="next-label hidden" id="examNextLabel"></div>
+    <div class="control-row">
+      <button id="pauseBtn" class="secondary-btn">일시정지</button>
+      <button id="stopBtn" class="secondary-btn danger">중단</button>
+    </div>
+  </section>
+
+  <section id="screen-finished" class="screen hidden">
+    <h2>시험 종료</h2>
+    <p>수고했어요.</p>
+    <button id="restartBtn" class="primary-btn">처음으로</button>
+  </section>
+
+</main>
+
+<div id="confirmDialog" class="dialog hidden">
+  <div class="dialog-box">
+    <p>시험을 중단할까요? 지금까지 진행은 저장되지 않아요.</p>
+    <div class="dialog-actions">
+      <button id="confirmCancel" class="secondary-btn">취소</button>
+      <button id="confirmOk" class="secondary-btn danger">중단</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

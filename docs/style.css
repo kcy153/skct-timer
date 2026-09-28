@@ -1,0 +1,208 @@
+/* 계획서 §6 색상표를 그대로 사용. Navy/Ice는 다크·라이트 모드에서 배경↔글자로 자리를 바꾼다. */
+:root {
+  --navy: #0b1626;
+  --ice: #e6edf5;
+  --paper: #f5f7fa;
+  --teal: #2bb6a3;
+  --amber: #f2a93b;
+
+  --bg: var(--paper);
+  --fg: var(--navy);
+  --card-bg: #ffffff;
+  --muted: #6b7684;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--navy);
+    --fg: var(--ice);
+    --card-bg: #101d33;
+    --muted: #9fb0c3;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.screen {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.screen.hidden {
+  display: none;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.settings-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 16px 20px;
+}
+
+.settings-block label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.checkbox-row label {
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--teal);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--teal);
+  width: 18px;
+  height: 18px;
+}
+
+.primary-btn, .secondary-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 16px 32px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 140px;
+}
+
+.primary-btn {
+  background: var(--teal);
+  color: #ffffff;
+}
+
+.primary-btn:active {
+  opacity: 0.85;
+}
+
+.secondary-btn {
+  background: var(--card-bg);
+  color: var(--fg);
+  border: 1px solid var(--muted);
+}
+
+.secondary-btn.danger {
+  color: #d64545;
+  border-color: #d64545;
+}
+
+.control-row {
+  display: flex;
+  gap: 12px;
+}
+
+.segment-label {
+  font-size: 1.2rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.time-display {
+  font-size: 4.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+}
+
+.time-display.warning {
+  color: var(--amber);
+}
+
+.next-label {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.next-label.hidden {
+  display: none;
+}
+
+.fast-badge {
+  color: var(--amber);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.fast-badge.hidden {
+  display: none;
+}
+
+.dialog {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.dialog.hidden {
+  display: none;
+}
+
+.dialog-box {
+  background: var(--card-bg);
+  color: var(--fg);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 400px) {
+  .time-display {
+    font-size: 3.6rem;
+  }
+}
